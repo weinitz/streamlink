@@ -30,7 +30,7 @@ log = logging.getLogger(__name__)
 class TV4Play(Plugin):
     video_id = None
 
-    api_url = "https://playback-api.b17g.net"
+    api_url = "https://playback2.a2d.tv"
     api_assets = urljoin(api_url, "/asset/{0}")
 
     _meta_schema = validate.Schema(
@@ -52,8 +52,11 @@ class TV4Play(Plugin):
     def get_metadata(self):
         params = {
             "device": "browser",
+            "browser": "GoogleChrome",
             "protocol": "hls",
             "service": "tv4",
+            "drm": "widevine",
+            "capabilities": "live-drm-adstitch-2,expired_assets"
         }
         try:
             res = self.session.http.get(
